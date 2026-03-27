@@ -23,5 +23,7 @@ jobs:
           script: |
             docker stop app || true
             docker rm app || true
+            docker stop $(docker ps -q) || true
+            docker rm $(docker ps -aq) || true
             docker build -t devops-app /home/ubuntu/app
             docker run -d -p 80:5000 --name app devops-app
